@@ -1,0 +1,10 @@
+작업할 폴더에 
+1.git init
+2. git remote add origin '.git 폴더주소'
+3. git status -> 이상 없으면 작업 시작
+4. 작업 (파일 변경, 코드 소스 변경 등등)
+5. git status-> 빨간 줄 등장
+6. git add '프로그램명 또는 폴더명'
+7. git commit -m '변경 내용 적기'
+8. git push 
+9. 오류 뜨면 파일 삭제하고 다시 Clone부터 ㄱㄱ(새로 만든 파일은 따로 옮겨놓을것)
