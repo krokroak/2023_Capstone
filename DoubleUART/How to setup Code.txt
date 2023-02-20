@@ -1,0 +1,14 @@
+IOC파일 짤때
+
+DMA 설정 안해도 됨.
+UART1핀만 설정 -> PB5,6? 이렇게 RX,TX으로 설정
+PB5,6은 L432KC에서 D4,D5핀임
+
+NVIC에서 인터럽트 두개 다 체크온 시켜주고, 19200BIT/s로 속도 통일,None Parity, 8btis size
+
+RCC에서 High Speed 설정 체크 해제, Crystal Clock -> Disable 
+이렇게 해서 
+코드 파일 만들고
+
+main 코드 복붙 ㄱㄱ
+
