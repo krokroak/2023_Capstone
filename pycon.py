@@ -15,15 +15,17 @@ line= ''
     
 """
 count = 1
+send = str(count)
+
 while True:
-    send = str(count)
-    stm.write(send.encode())    
-    time.sleep(0.02)
+    #print(stm.name)
+    stm.open()    
+    stm.write(send.encode())
     line = stm.readline()
     time.sleep(0.02)
-    #line_left= stm.inWaiting()
-    #line += stm.readline(line_left)
     print(line.decode()) 
     count += 1
     if(count >20):
+        stm.close()
         break
+        
