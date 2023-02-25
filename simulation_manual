@@ -16,7 +16,7 @@ simscape로 불러와서 제어하려고 했으나 파라미터 변수값 확인
 위 모델에 있는 revolute joint들은 각각 배어링의 역할을 하여 joint를 기준으로 암과 바디가 회전진자운동이 가능하도록 제작했습니다. 
 또한 각 revolute joint에서 회전각들을 추출하여 이를 PID제어기의 제어 입력으로 넣어 로봇이 균형을 유지할 수 있도록 했습니다. 
 
-
+제어기의 initial perturbation 부분에 step입력등의 reference 입력을 넣어줄 수 있습니다.   
 
 
 참고자료
