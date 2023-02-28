@@ -123,6 +123,18 @@ MDAS -> 라즈베리파이 송신 시 오류
 2. 한번 보내지고 나서 연결이 끊기는 현상을 보임(MDAS 쓰레기.....)
 3. 반대로 라즈베리파이에서 MDAS로 송신할때 데이터를 제대로 받기는 하나, MDAS 터미널에서 받지 못함
 
+- 주의할것 
+1. 변수타입 (MDAS에서 STM32로 제대로 받을려면 데이터타입을 int(uint32_t)로 선언해야함. 라는 개인적인 생각)
+2. MAX485 연결방법 숙지 STM32 DE pin을 MAX485에 RE에 연결 TX(pin D5)->DI, RX(pin D4)->RO에 연결 
+3. Molex 필요할듯 (준호가 개인적으로 구입함)
+4. USB-485 커넥터 구매해서 오면 해볼예정
+
+연결해야하는 방법
+
+Window MDAS Program (UART2 USB->STM32) -> STM32 (UART2-> UART1) -> 
+Motor Driver  (UART1 RS485-MAX485) -> 3상 연결 Motor
+
+
 # 2023.2.28 (by KJH)
 stm32에서 RTOS 사용방법과 역할에 대해 찾아봄
 stm32에서 RTOS를 사용하기 위해선 CMSIS-RTOS API의 Free RTOS를 사용해야함(IDE에 기본으로 내장되어 있음)
@@ -133,19 +145,32 @@ stm32에서 RTOS를 사용하기 위해선 CMSIS-RTOS API의 Free RTOS를 사용
 참고자료
 https://blog.naver.com/0ljy0/222149773283
 
+- SapBori -> RTOS 종류 및 사용법 in LiNux
+리눅스 스케쥴링
+-> BATCH
+-> IDLE
+-> DeadLine
+-> *SCHED_Other
+일반프로세스 타입, 별도 지정을 하지 않을 시에 설정 
+
+-> *SChed_FIFO((First in First Out),SChed_RR(Round Robin)
+ RT를 위한 스케쥴링 Policy 
+
+RR -> 프로세스간 time-slicing (선점 시간할당)
+FIFO -> 우선순위제
 
 
-연결해야하는 방법
+리눅스 : nice or renice 또는 chrt로 우선순위 결정
+Nice, Renice 는 +19~-20으로 낮을 수록 우선순위가 높음
+일반 Process -> nice ||| RT process -> chrt
 
-Window MDAS Program (UART2 USB->STM32) -> STM32 (UART2-> UART1) -> 
-Motor Driver  (UART1 RS485-MAX485) -> 3상 연결 Motor
+사용 명령어
+chrt -f -p [우선순위 값] [프로세스번호]
+-f : FIFO 사용
+-o : Other 사용
+-r : RR 사용
 
-- 주의할것 
-1. 변수타입 (MDAS에서 STM32로 제대로 받을려면 데이터타입을 int(uint32_t)로 선언해야함. 라는 개인적인 생각)
-2. MAX485 연결방법 숙지 STM32 DE pin을 MAX485에 RE에 연결 TX(pin D5)->DI, RX(pin D4)->RO에 연결 
-3. Molex 필요할듯 (준호가 개인적으로 구입함)
-4. USB-485 커넥터 구매해서 오면 해볼예정
-
+ps(우선순위 알아보기)
 #################################################
 #################  SENSOR, IC ###################
 #################################################
