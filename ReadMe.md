@@ -145,20 +145,18 @@ stm32에서 RTOS를 사용하기 위해선 CMSIS-RTOS API의 Free RTOS를 사용
 참고자료
 https://blog.naver.com/0ljy0/222149773283
 
-- SapBori -> RTOS 종류 및 사용법 in LiNux
+// SapBori -> RTOS 종류 및 사용법 in LiNux
 리눅스 스케쥴링
--> BATCH
--> IDLE
--> DeadLine
--> *SCHED_Other
+- BATCH
+- IDLE
+- DeadLine
+- *SCHED_Other
 일반프로세스 타입, 별도 지정을 하지 않을 시에 설정 
-
--> *SChed_FIFO((First in First Out),SChed_RR(Round Robin)
+- *SChed_FIFO((First in First Out),SChed_RR(Round Robin)
  RT를 위한 스케쥴링 Policy 
 
-RR -> 프로세스간 time-slicing (선점 시간할당)
-FIFO -> 우선순위제
-
+- RR -> 프로세스간 time-slicing (선점 시간할당)
+- FIFO -> 우선순위제
 
 리눅스 : nice or renice 또는 chrt로 우선순위 결정
 Nice, Renice 는 +19~-20으로 낮을 수록 우선순위가 높음
@@ -166,10 +164,9 @@ Nice, Renice 는 +19~-20으로 낮을 수록 우선순위가 높음
 
 사용 명령어
 chrt -f -p [우선순위 값] [프로세스번호]
--f : FIFO 사용
--o : Other 사용
--r : RR 사용
-
+| -f : FIFO 사용
+| -o : Other 사용
+| -r : RR 사용
 ps(우선순위 알아보기)
 #################################################
 #################  SENSOR, IC ###################
