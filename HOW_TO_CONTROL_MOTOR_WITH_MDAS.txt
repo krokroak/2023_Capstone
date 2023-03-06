@@ -1,3 +1,10 @@
+시작시 RESET_SYSTEM, ALARM_RESET 필수
+통신을 위해서 -> 오로지 2,4핀만 GND에 연결
+
+가장 중요한 TQ_CTRL명령어에 Write Data = 1 -> Send PID 보내고
+MOTOR_CONTROL버튼 눌러서 Torque 컨트롤 누르고 원하는 토크값(전류값) 1당 0.1A 입력후 Run(+) or (-) 하면 모터는 움직임
+
+
 183 184 1 10 1 8 125 -> ALARM_RESET
 
 
