@@ -46,7 +46,8 @@ Simulink Simscape Multibody 에서 생각을 달리 해봤다
 
 
 # 3.7
-![image](https://user-images.githubusercontent.com/66929200/223439875-01b6a4d6-5f99-4690-840b-b857e9c22d0a.png)
+
+
 일단 바퀴에 theta 를 넣어서 제대로 움직이는 지 확인을 해보려 했으나
 
 바퀴에 40도 각도를 주면 
@@ -54,3 +55,4 @@ Simulink Simscape Multibody 에서 생각을 달리 해봤다
 나도 돌겠다.
 
 사진은 Block 을 수정하다가 world frame 을 잘못건드려서 난리가 난 모습이다.
+![image](https://user-images.githubusercontent.com/66929200/223439875-01b6a4d6-5f99-4690-840b-b857e9c22d0a.png)
