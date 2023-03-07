@@ -44,3 +44,13 @@ Simulink Simscape Multibody 에서 생각을 달리 해봤다
 ![image](https://user-images.githubusercontent.com/66929200/223115952-01cdce5c-f00e-469e-b5bb-fa2c4853c7ff.png)
 ![image](https://user-images.githubusercontent.com/66929200/223116980-0a4d8bad-310f-4629-a01d-993db49a58b9.png)
 
+
+# 3.7
+![image](https://user-images.githubusercontent.com/66929200/223439875-01b6a4d6-5f99-4690-840b-b857e9c22d0a.png)
+일단 바퀴에 theta 를 넣어서 제대로 움직이는 지 확인을 해보려 했으나
+
+바퀴에 40도 각도를 주면 
+샤프트에 큰풀리 작은 풀리가 다 묶여있어서 풀리만 도는게 아니라 다같이 확돌아버렸다. 
+나도 돌겠다.
+
+사진은 Block 을 수정하다가 world frame 을 잘못건드려서 난리가 난 모습이다.
