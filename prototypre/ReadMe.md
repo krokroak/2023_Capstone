@@ -54,5 +54,21 @@ Simulink Simscape Multibody 에서 생각을 달리 해봤다
 샤프트에 큰풀리 작은 풀리가 다 묶여있어서 풀리만 도는게 아니라 다같이 확돌아버렸다. 
 나도 돌겠다.
 
-사진은 Block 을 수정하다가 world frame 을 잘못건드려서 난리가 난 모습이다.
+사진은 Block 을 수정하다가 world frame 을
+
+
+
+ 잘못건드려서 난리가 난 모습이다.
 ![image](https://user-images.githubusercontent.com/66929200/223439875-01b6a4d6-5f99-4690-840b-b857e9c22d0a.png)
+
+
+
+# 3.14 
+
+base - follower 를 다시 수정하고 나서 만들었는데 이번에는 바퀴가 안돌아갔다.
+
+ 이유는 revolute joint 가 하나에 비해 rigid transform 이 너무 여러개인것
+ 너무 frame 의 수가 부족해서 생겨난 문제인것 같다.
+ 찾아보니까 file solid, 또는 solid 를 만드는 block 에서 frame 을 자체적으로 추가, 수정 할 수 있다는 것을 알았다.
+ 다음주 발표 전까지는 어느정도 완성이 되어야 할..
+https://user-images.githubusercontent.com/66929200/224895526-4a51fb76-36a8-4ddc-9764-93095118ec78.mp4
