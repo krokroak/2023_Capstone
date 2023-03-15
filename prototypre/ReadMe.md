@@ -72,3 +72,17 @@ base - follower 를 다시 수정하고 나서 만들었는데 이번에는 바�
  찾아보니까 file solid, 또는 solid 를 만드는 block 에서 frame 을 자체적으로 추가, 수정 할 수 있다는 것을 알았다.
  다음주 발표 전까지는 어느정도 완성이 되어야 할..
 https://user-images.githubusercontent.com/66929200/224895526-4a51fb76-36a8-4ddc-9764-93095118ec78.mp4
+
+
+
+# 3.15 
+위의 문제에서 단순히 frame 문제 인줄 알았지만, 단순한 polygon 덩어리의 결합으로는 뭔가를 할 수 없을것 같다.
+( 실력이 안되서 못하는듯)
+
+지금 까지는 문제로
+Pulley 쪽 두부분 조립이 원할하지 않다는점 --> 이것도 gear constraint 처럼 두개의 회전축이 같은 평면에 있어야 하는건가? 
+그래서 Pulley constraint 를 사용하지 않고..
+
+요약하자면 지금까지의 시뮬레이션은 우리가 만드려는 작품의 메커니즘 Pulley, Gear 이 두부분을 Multibody 로만 구현하기가 힘든 부분이 있다.
+Simscape 의 Multibody에만 몰두에서 시뮬레이션을 할 것이 아니라
+Simscape-Mechanism, Multibody 두부분 ( 아마 회로 까지 들어가면 Electric 까지 써야 할 것 같다.)
