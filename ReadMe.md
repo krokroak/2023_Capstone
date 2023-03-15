@@ -261,7 +261,7 @@ ps(우선순위 알아보기)
 IC --> LM7805, 5v Regulator
 Sensor
 --> MPU6050 or MPU9250 
---> encoder ( 암에 부착될 엔코더)
+
 
 
 
