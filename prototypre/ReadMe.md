@@ -86,3 +86,14 @@ Pulley 쪽 두부분 조립이 원할하지 않다는점 --> 이것도 gear cons
 요약하자면 지금까지의 시뮬레이션은 우리가 만드려는 작품의 메커니즘 Pulley, Gear 이 두부분을 Multibody 로만 구현하기가 힘든 부분이 있다.
 Simscape 의 Multibody에만 몰두에서 시뮬레이션을 할 것이 아니라
 Simscape-Mechanism, Multibody 두부분 ( 아마 회로 까지 들어가면 Electric 까지 써야 할 것 같다.)
+
+
+# 3.16 
+여태 안되던 문제를 찾았다...
+우리가 만들었던 샤프트를 file solid 를 통해서 만들면 .. 풀리와 완벽하게 조립이 안되는게 문제점이였다.
+( 샤프트 빼고 하니까 잘돌아감 )
+
+
+https://user-images.githubusercontent.com/66929200/225520315-0dc8c864-d914-4b68-a484-a289294cb415.mp4
+
+
