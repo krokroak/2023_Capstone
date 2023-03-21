@@ -138,3 +138,9 @@ IC --> LM7805, 5v Regulator
 Sensor
 --> MPU6050 or MPU9250 
 
+# 2023.03.20 (by KMJ writing PMG)
+- 모터 엔코더 값 읽기 설정법
+  - POSI_RESET : 모터 위차 값을 0으로 셋 
+  - ENC_PPR = 16384로 셋
+  - USE_ENC_PHASE = 1 : 모터위치 엔코더로 읽어오기
+  - 이렇게 하면 읽어오는 거 확인(확인 방법 : 엔코더 선 끊으면 모터 정지 및 OUT DATA = 0) 
