@@ -154,3 +154,9 @@ Sensor
 - MPU6050 KALMANFilter python 적용 버전은 이후 수정 예정(값이 계속 더해짐)
 - 모터는 게인 문제일수도 있다고생각함, + -> -로 갈 때 빠르게 돈다는거는 오차에 의한 거일 수 도 있다..
 - 오늘 Cycle Test 결과는 200us 
+
+# 2023.03.22 by KJH
+- 기존의 인벤터 파일을 simscape에 input한 모델에 spatial contact block을 적용한 모델을 제작(실행할 시 참조변수 추가 필요)
+- 센서 추가 및 기존의 만들어둔 PID제어기 대입까지는 했으나 balancing까지는 아직 미구현
+- 추후 제어기 파라미터 조정및 제어기 재설계을 통해 balancing 해볼 예정  
+
