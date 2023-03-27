@@ -96,4 +96,31 @@ Simscape-Mechanism, Multibody 두부분 ( 아마 회로 까지 들어가면 Elec
 
 https://user-images.githubusercontent.com/66929200/225520315-0dc8c864-d914-4b68-a484-a289294cb415.mp4
 
+# 3.17 ~ 3. 22 
+위에 문제점들을 해결했다ㅣ 
+샤프트를 그냥 원래있던 cylinder solid 로 바꿔서 부품 체결을 했다 
+
+![image](https://user-images.githubusercontent.com/66929200/227857085-5bd82473-e728-41a2-9805-3a3917bb0b8e.png)
+(simulink block diagram)
+![image](https://user-images.githubusercontent.com/66929200/227860615-858ddba9-4f1e-4d2e-ac69-eaf5c6540090.png)
+실제로 조립이 잘된 문제 였다..
+
+그리고 조립을 하다가 막힌 부분이 있었는데 두개의 Arm이 샤프트에 매달려 자유운동을 해야하는데
+(bearing 이 필요한 부분으로 여러가지 문제 점이 있었다)
+pulley 가 돌아가면 shaft 가 돌아가는건 구현을 했지만 shaft 가 돌아감에 따라 Arm이 같이 돌아가는 문제가 생겼다.
+그래서 아래 샤프트에 revolute joint 로 묶고 시작 각도를 180도로 맞춰놨다.
+![image](https://user-images.githubusercontent.com/66929200/227861099-9ff9f959-e57d-4de1-838c-c57693394249.png)
+
+그리고 spatial contact force 를 이용해서 평지에서 자세제어와 계단을 올라갈 때의 자세제어 시뮬레이션을 해볼 예정이다.
+
+하드웨어가 완벽하게 다 주문이 되면 무게측정을 해서 file solid 의 parameter 를 다시 조정하고
+풀리에서 발생하는 마찰력, 여러가지 디테일을 계속 추가해서 시뮬레이션을 진행해봐야 할 것 같다.
+
+
+아래의 동영상은 제어가 추가되지않은 ( 모터에만 ) 입력을 넣은 모습이다.
+
+https://user-images.githubusercontent.com/66929200/227863122-e6cca382-48b9-4f92-bf0d-876312bbe70a.mp4
+
+
+
 
