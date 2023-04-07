@@ -49,13 +49,11 @@ UART_HandleTypeDef huart2;
 uint8_t rxdata;
 uint8_t rx_pool[23];
 uint8_t tx_send[20];
-uint8_t cpos[5];
+uint8_t cpos[5];	// Transmit Charcter Array
 int cnt =0;
-int r_flag=0;
-int pos[4];
-int p_cnt=0;
-int posnum=0;
-int pos_old=0;
+int r_flag=0;		// Receive Complte Flag			//
+int posnum=0;		// Save Position Data
+int pos_old=0;		// Save Old Position Data
 char minus_c = '-';
 char blank = ' ';
 int minus=0;
@@ -97,14 +95,25 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart){
 		if(cnt>23){
 			cnt=0;
 			r_flag=1;
+			//HAL_UART_Transmit_IT(&huart2,&rx_pool,23);
 		}
-		if(r_flag == 1 && rx_pool[18]==255){
-			minus =1;
+		if(r_flag==1 && rx_pool[18]==255){
+			r_flag =0;
+			posnum = (255-rx_pool[15])*1 + (255-rx_pool[16])*256 + (255-rx_pool[17])*256*256 + (255-rx_pool[18])*256*256*256 ;
+			posnum++;
+			if((posnum /pos_old)< 2 ){
+				cpos[4] = (posnum%10)+48;
+				cpos[3] = ((posnum%100)/10)+48;
+				cpos[2] = ((posnum%1000)/100)+48;
+				cpos[1] = ((posnum%10000)/1000)+48;
+				cpos[0] = (posnum/10000)+48;
+				HAL_UART_Transmit(&huart2,&minus_c,1,10);
+				HAL_UART_Transmit(&huart2,&cpos,5,100);
+				HAL_UART_Transmit(&huart2,&blank,1,10);
+				pos_old = posnum;
+			}
 		}
-		else if(r_flag ==1 && rx_pool[18]==0){
-			minus =0;
-		}
-		if(r_flag == 1 && minus !=1){
+		else if(r_flag == 1 && rx_pool[18] !=255){
 			r_flag=0;
 			// 0~9 -> 48~57
 			posnum = 1*rx_pool[15] + 256*rx_pool[16] + 256*256*rx_pool[17] + 256*256*256*rx_pool[18];
@@ -115,30 +124,13 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart){
 				cpos[1] = ((posnum%10000)/1000)+48;
 				cpos[0] = (posnum/10000)+48;
 				pos_old = posnum;
-				HAL_UART_Transmit(&huart2,&cpos,5,100);
-				HAL_UART_Transmit(&huart2,&blank,1,10);
+				HAL_UART_Transmit(&huart2,&cpos,5,5); // 1byte 송신에 0.5ms (19200bps 기준) 적절히 1ms 잡고 *5 -> 5ms
+				HAL_UART_Transmit(&huart2,&blank,1,1);
 			}
 		}
-		else if(r_flag==1 && minus ==1){
-			r_flag =0;
-			posnum = (255-rx_pool[15])*1 + (255-rx_pool[16])*256 + (255-rx_pool[17])*256*256 + (255-rx_pool[18])*256*256*256 ;
-			posnum++;
-			if((posnum /pos_old)< 2 ){
-				cpos[4] = (posnum%10)+48;
-				cpos[3] = ((posnum%100)/10)+48;
-				cpos[2] = ((posnum%1000)/100)+48;
-				cpos[1] = ((posnum%10000)/1000)+48;
-				cpos[0] = (posnum/10000)+48;
-				pos_old = posnum;
-				HAL_UART_Transmit(&huart2,&minus_c,1,10);
-				HAL_UART_Transmit(&huart2,&cpos,5,100);
-				HAL_UART_Transmit(&huart2,&blank,1,10);
-			}
-		}
-		else return 0;
 	}
 	if(huart->Instance==USART2){
-		HAL_UART_Transmit(&huart1,&rxdata,1,10);
+		//HAL_UART_Transmit(&huart1,&rxdata,1,10);
 	}
 
 	/*if(huart->Instance==USART2){
@@ -217,14 +209,12 @@ int main(void)
 
   BC_OFF();
   BC_ON();
-  Torque_Control_Right(3);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
 	  HAL_UART_Receive_IT(&huart1,&rxdata,1);
 	 //  DATA_CHK();
     /* USER CODE END WHILE */
