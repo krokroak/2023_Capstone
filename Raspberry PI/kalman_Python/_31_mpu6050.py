@@ -5,7 +5,7 @@
 # Python Standard Library Imports
 from time import sleep
 from math import atan, atan2, sqrt
-
+import smbus2
 # External Imports
 pass
 
@@ -586,8 +586,8 @@ class MPU6050:
     dmpPacketSize = 42
     
     # construct a new object with the I2C address of the MPU6050
-    def __init__(self, add):
-        self.i2c = PyComms(add)
+    def __init__(self, add, ch):
+        self.i2c = PyComms(add, ch)
         self.address = add
         
     def initialize(self):

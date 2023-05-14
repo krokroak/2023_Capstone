@@ -69,9 +69,6 @@ class KalmanAngle:
         self.RMeasure = RMeasure
 
     def getRate(self):
-        return self.rate
-
-    def getQAngle(self):
         return self.QAngle
 
     def getQBias(self):

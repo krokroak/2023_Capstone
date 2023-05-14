@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 # Python Standard Library Imports
-import smbus2
 
 # External Imports
 pass
@@ -14,7 +13,7 @@ pass
 # ===========================================================================
 
 class PyComms:
-    def __init__(self, add, bus = smbus2.SMBus(1)):
+    def __init__(self, add, bus):
         self.address = add
         self.bus = bus
 

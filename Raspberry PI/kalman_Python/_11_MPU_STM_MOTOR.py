@@ -4,8 +4,6 @@ import time
 mpu6050L = Angle_MPU6050_1(0x68)  
 mpu6050R = Angle_MPU6050_1(0x69)
 mpu6050M = Angle_MPU6050_0(0x68)
-import threading
-
 
 mpu6050L.start_measure_thread()
 mpu6050R.start_measure_thread()
@@ -30,13 +28,6 @@ time.sleep(0.1)
 # 상보필터를 이용한 각도
 #compl_roll = mpu6050L.get_complementary_roll()
 #compl_pitch = mpu6050L.get_complementary_pitch()
-def st_send(stm,angle):
-    current = str(angle/2) + ' '
-    tx = current.encode(encoding='UTF-8',errors='ignore')
-    stm.write(tx)
-    print(current)
-    print(' ')
-
 
 
 while True:
@@ -47,7 +38,6 @@ while True:
     kalman_rollR = mpu6050R.get_kalman_roll()
     #kalman_pitchR = mpu6050R.get_kalman_pitch()
     kalman_rollM = mpu6050M.get_kalman_roll()
-    #kalman_pitchM = mpu6050R.get_kalman_pitch()
     Lr= int(round(kalman_rollL,3)*100)
     #Lp = int(round(kalman_pitchL,3)*100)
     Rr= int(round(kalman_rollR,3)*100)
@@ -57,15 +47,25 @@ while True:
     currentL = str(Lr)+ ' '
     currentR = str(Rr)+ ' '
     currentM = str(Mr)+ ' '
-    th1 = threading.Thread(target= st_send(stmL,Lr))
-    th2 = threading.Thread(target= st_send(stmR,Rr))
+    #sendL = currentL.encode(encoding='UTF-8',errors='ignore')
+    #sendR = currentR.encode(encoding='UTF-8',errors='ignore')
+    #stmR.write(sendR)
     
-    th1.start()
-   
-    th2.start()
-    th1.join()
-    th2.join()
-    time.sleep(0.01)
+    #stmL.write(sendL)
+    
+    time.sleep(0.1)
+    #print(currentL,' ',currentR) 
     end = time.time()
-    #print(str(send2-send1))
+    print(currentL, ' ', currentR, ' ',currentM )
     
+    # 100Hz 제어 중 (UART는 40KHz까지 가능)
+    # time 체크시 0.0006s 미만으로 나옴 -> 1666Hz (time.sleep 0.025, Uart Send)  Solo
+    # time 체크 8.9884 e-05 s미만  = 0.000089884 ->  약 11125Hz  (No time Sleep, Uart Send, Dual Sensor)
+    # time 체크 0.00025xxxxx s미만  =>  약 4000Hz  (0.001 time Sleep, Uart Send, Dual Sensor)
+
+
+# MAX485는 라즈배리파이4 5V  + GND
+
+# USB 연결 필수 (3.3V 넣어야함)
+
+# 

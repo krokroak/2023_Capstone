@@ -16,7 +16,7 @@ import threading
 import _31_mpu6050 as mpu6050
 
 
-class Angle_MPU6050:
+class Angle_MPU6050_1:
     # Read the gyro and acceleromater values from MPU6050
     def __init__(self,ADD):
         self.pitch = 0
@@ -50,7 +50,7 @@ class Angle_MPU6050:
     # MPU-6050 초기화
     def MPU_Init(self,ADD):
         # Sensor initialization
-        self.mpu = mpu6050.MPU6050(ADD)
+        self.mpu = mpu6050.MPU6050(ADD,smbus2.SMBus(1))
         self.mpu.dmpInitialize()
         self.mpu.setDMPEnabled(True)
 
