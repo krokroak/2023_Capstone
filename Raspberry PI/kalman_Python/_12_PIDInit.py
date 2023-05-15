@@ -19,14 +19,18 @@ class PID:
         self.error_dif = 0 
         self.d_value = 0
         self.input = 0
+
+
     def set_angle(self, ref_angle, angle):
         self.ref_angle = ref_angle
         self.angle = angle
         self.error_angle = self.ref_angle - self.angle
+       
    
     def set_dt(self):
         self.dt = time.time()-self.timer
         self.timer = time.time()
+        return self.dt
     
     def get_p_value(self):
         self.p_value = self.kp * self.error_angle
@@ -40,12 +44,12 @@ class PID:
     
     
     def get_d_value(self):
-        self.error_old = self.error_old
         self.error_dif = (self.error_angle - self.error_old) /self.dt
-        self.d_value = self.kd* self.d_value
+        self.d_value = self.kd* self.error_dif
         return self.d_value
     
     
     def get_input(self):
         self.input = self.get_p_value() + self.get_i_value() + self.get_d_value()
+        self.error_old = self.error_angle
         return self.input
