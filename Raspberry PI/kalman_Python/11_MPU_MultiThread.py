@@ -2,13 +2,13 @@ from _21_MPU_Thread_ch1 import Angle_MPU6050_1
 from _21_MPU_Thread_ch0 import Angle_MPU6050_0
 import time
 mpu6050L = Angle_MPU6050_1(0x68)  
-mpu6050R = Angle_MPU6050_1(0x69)
+#mpu6050R = Angle_MPU6050_1(0x69)
 mpu6050M = Angle_MPU6050_0(0x68)
 import threading
 
 
 mpu6050L.start_measure_thread()
-mpu6050R.start_measure_thread()
+#mpu6050R.start_measure_thread()
 mpu6050M.start_measure_thread()
 # 끝!!! 이제 쓰레드가 돌면서 mpu6050L의 변수에 값을 계속 update한다.
 import serial
@@ -44,28 +44,27 @@ while True:
     # Kalman 필터를 이용한 각도
     kalman_rollL = mpu6050L.get_kalman_roll()
     #kalman_pitchL = mpu6050L.get_kalman_pitch()
-    kalman_rollR = mpu6050R.get_kalman_roll()
+    #kalman_rollR = mpu6050R.get_kalman_roll()
     #kalman_pitchR = mpu6050R.get_kalman_pitch()
     kalman_rollM = mpu6050M.get_kalman_roll()
     #kalman_pitchM = mpu6050R.get_kalman_pitch()
-    Lr= int(round(kalman_rollL,3)*100)
+    Lr= int(round(kalman_rollL,3))
     #Lp = int(round(kalman_pitchL,3)*100)
-    Rr= int(round(kalman_rollR,3)*100)
+    #Rr= int(round(kalman_rollR,3)*100)
     #Rp = int(round(kalman_pitchR,3)*100)
-    Mr= int(round(kalman_rollM,3)*100)
+    Mr= int(round(kalman_rollM,3))
     #Mp = int(round(kalman_pitchR,3)*100)
     currentL = str(Lr)+ ' '
-    currentR = str(Rr)+ ' '
+    #currentR = str(Rr)+ ' '
     currentM = str(Mr)+ ' '
-    th1 = threading.Thread(target= st_send(stmL,Lr))
-    th2 = threading.Thread(target= st_send(stmR,Rr))
+    #th1 = threading.Thread(target= st_send(stmL,Lr))
+    #th2 = threading.Thread(target= st_send(stmR,Rr))
     
-    th1.start()
-   
-    th2.start()
-    th1.join()
-    th2.join()
+    #th1.start()
+    #th2.start()
+    #th1.join()
+    #th2.join()
     time.sleep(0.01)
     end = time.time()
-    #print(str(send2-send1))
+    print(currentL,currentM)
     

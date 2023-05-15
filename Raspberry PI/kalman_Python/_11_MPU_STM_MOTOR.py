@@ -3,11 +3,11 @@ from _21_MPU_Thread_ch0 import Angle_MPU6050_0
 import time
 mpu6050L = Angle_MPU6050_1(0x68)  
 mpu6050R = Angle_MPU6050_1(0x69)
-mpu6050M = Angle_MPU6050_0(0x68)
+#mpu6050M = Angle_MPU6050_0(0x68)
 
 mpu6050L.start_measure_thread()
 mpu6050R.start_measure_thread()
-mpu6050M.start_measure_thread()
+#mpu6050M.start_measure_thread()
 # 끝!!! 이제 쓰레드가 돌면서 mpu6050L의 변수에 값을 계속 update한다.
 import serial
 
@@ -37,26 +37,25 @@ while True:
     #kalman_pitchL = mpu6050L.get_kalman_pitch()
     kalman_rollR = mpu6050R.get_kalman_roll()
     #kalman_pitchR = mpu6050R.get_kalman_pitch()
-    kalman_rollM = mpu6050M.get_kalman_roll()
+    #kalman_rollM = mpu6050M.get_kalman_roll()
     Lr= int(round(kalman_rollL,3)*100)
     #Lp = int(round(kalman_pitchL,3)*100)
-    Rr= int(round(kalman_rollR,3)*100)
+    Rr= int(round(kalman_rollR/2,3)*100)
     #Rp = int(round(kalman_pitchR,3)*100)
-    Mr= int(round(kalman_rollM,3)*100)
+    #Mr= int(round(kalman_rollM,3)*100)
     #Mp = int(round(kalman_pitchR,3)*100)
     currentL = str(Lr)+ ' '
     currentR = str(Rr)+ ' '
-    currentM = str(Mr)+ ' '
-    #sendL = currentL.encode(encoding='UTF-8',errors='ignore')
-    #sendR = currentR.encode(encoding='UTF-8',errors='ignore')
+    #currentM = str(Mr)+ ' '
+    sendL = currentL.encode(encoding='UTF-8',errors='ignore')
+    sendR = currentR.encode(encoding='UTF-8',errors='ignore')
     #stmR.write(sendR)
+    stmL.write(sendL)
     
-    #stmL.write(sendL)
-    
-    time.sleep(0.1)
-    #print(currentL,' ',currentR) 
+    time.sleep(0.01)
+    print(currentL,' ',currentR) 
     end = time.time()
-    print(currentL, ' ', currentR, ' ',currentM )
+    #print(currentL, ' ', currentR, ' ',currentM )
     
     # 100Hz 제어 중 (UART는 40KHz까지 가능)
     # time 체크시 0.0006s 미만으로 나옴 -> 1666Hz (time.sleep 0.025, Uart Send)  Solo
