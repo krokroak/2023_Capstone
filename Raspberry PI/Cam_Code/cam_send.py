@@ -4,9 +4,12 @@ import time
 import numpy as np
 
 
-stm = serial.Serial(port = '/dev/ttyAMA1',baudrate = 19200,timeout=1.0,bytesize=serial.EIGHTBITS,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE)
+#stm = serial.Serial(port = '/dev/ttyAMA1',baudrate = 19200,timeout=1.0,
+#                  bytesize=serial.EIGHTBITS,
+#                    parity=serial.PARITY_NONE,
+#                    stopbits=serial.STOPBITS_ONE)
 time.sleep(0.5)
-stm.reset_input_buffer()
+#stm.reset_input_buffer()
 def canny_serial():
     power = "Target Pixel Detected "        #전송용 메세지
     cam = cv2.VideoCapture(0)
@@ -49,7 +52,7 @@ def canny_serial():
         if edge[h_c+5][w_c]==255 | edge[h_c-5][w_c]==255 |edge[h_c][w_c+5]==255| edge[h_c][w_c-5]==255:
             print(power)
             #window 노트북으로 전송
-            stm.write(power.encode(encoding='UTF-8',errors='ignore'))
+            #stm.write(power.encode(encoding='UTF-8',errors='ignore'))
             time.sleep(0.1)
         if cv2.waitKey(10) == ord('q'):  # Introduce 10 milisecond delay. press q to exit.
             cv2.destroyAllWindows()
